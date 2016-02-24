@@ -1,4 +1,4 @@
-# PDC Server Stack DevOps Scripts
+# HDC Collector
 
 ## Deploy with Docker Hub
 
@@ -65,6 +65,6 @@ MODE=dev TAG=dev make
 Default paths are broken into private and configuration (not private) folders.
 For consistency, use a similar path for this repo.
 
-* DevOps: /pdc/stack
-* Private: /pdc/data/private
-* Configuration: /pdc/data/config
+* DevOps: /hdc/collector
+* Private: /hdc/private
+* Configuration: /hdc/config
