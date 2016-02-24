@@ -6,6 +6,8 @@ default: configure deploy
 
 configure: config-docker config-mongodb
 
+queries: query_importer
+
 
 ###################
 # Individual jobs #
@@ -37,6 +39,12 @@ config-mongodb:
 		fi; \
 		sudo chmod 755 /etc/rc.local
 
+query_importer:
+	sudo docker pull pdcbc/hapi:latest
+	sudo docker run -d --name query_importer --link hubdb:hubdb pdcbc/hapi:latest
+	sudo docker exec query_importer /app/queryImporter/import_queries.sh
+	sudo docker rm -fv query_importer
+	
 
 ################
 # Runtime prep #
