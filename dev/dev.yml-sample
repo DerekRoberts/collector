@@ -13,47 +13,9 @@
 # https://docs.docker.com/compose/compose-file/
 
 
-auth:
-  log_driver: "json-file"
-  ports:
-    - "3005:3005"
-    - "3006:3006"
-#  build: ./dev/auth
-#  environment:
-#    - PORT_AUTH_M=3005
-#    - PORT_AUTH_C=3006
-#    - DACS_FEDERATION=pdc.dev
-#    - DACS_JURISDICTION=test
-#    - NODE_TLS_REJECT_UNAUTHORIZED=0
-#    - NODE_SECRET=notVerySecret
-
-
 composer:
   log_driver: "json-file"
 #  build: ./dev/composer
-
-
-dclapi:
-  log_driver: "json-file"
-  ports:
-    - "3007:3007"
-#  build: ./dev/dclapi
-#  environment:
-#    - PORT_DCLAPI=3007
-
-
-hapi:
-  log_driver: "json-file"
-  ports:
-    - "3003:3003"
-#  build: ./dev/hapi
-#  environment:
-#    - PORT_AUTH_C=3006
-#    - PORT_DCLAPI=3007
-#    - PORT_HAPI=3003
-#    - DACS_FEDERATION=pdc.dev
-#    - NODE_TLS_REJECT_UNAUTHORIZED=0
-#    - NODE_SECRET=notVerySecret
 
 
 hubdb:
@@ -63,16 +25,20 @@ hubdb:
 #  build: ./dev/hubdb
 
 
-viz:
+endpoint:
   log_driver: "json-file"
-#  build: ./dev/viz
-#  environment:
-#    - PORT_AUTH_M=3005
-#    - PORT_AUTH_C=3006
-#    - PORT_HAPI=3003
-#    - PORT_VIZ=3004
-#    - PORT_VIZ_HTTP=3008
-#    - DACS_FEDERATION=pdc.dev
-#    - DACS_JURISDICTION=test
-#    - NODE_TLS_REJECT_UNAUTHORIZED=0
-#    - NODE_SECRET=notVerySecret
+#  build: ./dev/gateway
+  container_name: endpoint
+  hostname: endpoint
+  image: pdcbc/gateway:${TAG}
+  restart: always
+  links:
+    - composer:composer
+  ports:
+    - 3001:3001
+  volumes:
+    - /hdc/private/endpoint:/volumes/
+  environment:
+    - PORT_AUTOSSH=22
+    - GATEWAY_ID=0
+    - IP_COMPOSER=composer
