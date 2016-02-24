@@ -6,16 +6,6 @@
 # Use secondary .YML files for development and add -f YOUR.YML at execution.
 
 
-auth:
-  container_name: auth
-  hostname: auth
-  image: pdcbc/auth:${TAG}
-  restart: always
-  log_driver: "syslog"
-  volumes:
-    - /pdc/data/config/dacs/:/etc/dacs/:rw
-
-
 composer:
   container_name: composer
   hostname: composer
@@ -28,34 +18,9 @@ composer:
     - "2774:22"
     - "3002:3002"
   volumes:
-    - /pdc/data/config/authorized_keys/:/home/autossh/.ssh/:rw
-    - /pdc/data/config/composer_keys/:/etc/ssh/:rw
-    - /pdc/data/config/ep_known_hosts/:/root/.ssh/:rw
-    - /pdc/data/config/scheduled_jobs/:/app/util/job_params/:rw
-
-
-dclapi:
-  container_name: dclapi
-  hostname: dclapi
-  image: pdcbc/dclapi:${TAG}
-  restart: always
-  log_driver: "syslog"
-
-
-hapi:
-  container_name: hapi
-  hostname: hapi
-  image: pdcbc/hapi:${TAG}
-  restart: always
-  log_driver: "syslog"
-  links:
-    - auth:auth
-    - hubdb:hubdb
-    - dclapi:dclapi
-  volumes:
-    - /pdc/data/config/groups/:/volumes/groups/:rw
-    - /pdc/data/private/reports/:/volumes/reports/:rw
-
+    - /hdc/config/authorized_keys/:/home/autossh/.ssh/:rw
+    - /hdc/config/composer_keys/:/etc/ssh/:rw
+    - /hdc/config/scheduled_jobs/:/app/util/job_params/:rw
 
 
 hubdb:
@@ -65,21 +30,5 @@ hubdb:
   restart: always
   log_driver: "syslog"
   volumes:
-    - /pdc/data/private/mongo_live/:/data/db/:rw
-    - /pdc/data/private/mongo_dump/:/data/dump/:rw
-
-
-viz:
-  container_name: viz
-  hostname: viz
-  image: pdcbc/viz:${TAG}
-  restart: always
-  log_driver: "syslog"
-  links:
-    - auth:auth
-    - hapi:hapi
-  ports:
-    - "443:3004"
-    - "80:3008"
-  volumes:
-    - /pdc/data/config/cert/:/app/cert/:ro
+    - /hdc/private/mongo_live/:/data/db/:rw
+    - /hdc/private/mongo_dump/:/data/dump/:rw
