@@ -37,7 +37,7 @@ endpoint:
   ports:
     - 3001:3001
   volumes:
-    - /hdc/private/endpoint:/volumes/
+    - ${VOLS}/private/endpoint:/volumes/
   environment:
     - PORT_AUTOSSH=22
     - GATEWAY_ID=0

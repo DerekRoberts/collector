@@ -14,9 +14,9 @@ queries: query_importer
 ###################
 
 deploy:
-	@	sudo TAG=$(TAG) docker-compose $(YML) pull
-	@	sudo TAG=$(TAG) docker-compose $(YML) build
-	@	sudo TAG=$(TAG) docker-compose $(YML) up -d
+	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) pull
+	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) build
+	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) up -d
 
 config-docker:
 	@ wget -qO- https://raw.githubusercontent.com/PDCbc/devops/master/docker_setup.sh | sh
@@ -44,15 +44,19 @@ query_importer:
 	sudo docker run -d --name query_importer --link hubdb:hubdb pdcbc/hapi:latest
 	sudo docker exec query_importer /app/queryImporter/import_queries.sh
 	sudo docker rm -fv query_importer
-	
+
+vtest:
+	echo ${VOLS} should be populated
+
 
 ################
 # Runtime prep #
 ################
 
-# Default tag is latest
+# Default tag and volume path
 #
-TAG ?= latest
+TAG  ?= latest
+VOLS ?= /hdc
 
 
 # Default YML is base.yml

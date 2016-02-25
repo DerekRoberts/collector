@@ -18,9 +18,9 @@ composer:
     - "2774:22"
     - "3002:3002"
   volumes:
-    - /hdc/config/authorized_keys/:/home/autossh/.ssh/:rw
-    - /hdc/config/composer_keys/:/etc/ssh/:rw
-    - /hdc/config/scheduled_jobs/:/app/util/job_params/:rw
+    - ${VOLS}/config/authorized_keys/:/home/autossh/.ssh/:rw
+    - ${VOLS}/config/composer_keys/:/etc/ssh/:rw
+    - ${VOLS}/config/scheduled_jobs/:/app/util/job_params/:rw
 
 
 hubdb:
@@ -30,5 +30,5 @@ hubdb:
   restart: always
   log_driver: "syslog"
   volumes:
-    - /hdc/private/mongo_live/:/data/db/:rw
-    - /hdc/private/mongo_dump/:/data/dump/:rw
+    - ${VOLS}/private/mongo_live/:/data/db/:rw
+    - ${VOLS}/private/mongo_dump/:/data/dump/:rw
