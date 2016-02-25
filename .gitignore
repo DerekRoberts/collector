@@ -13,6 +13,8 @@
 .directory
 dev/*/
 dev/dev.yml
+vols/
+test.sh
 
 ########################
 ### GitHub Suggested ###
