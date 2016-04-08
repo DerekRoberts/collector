@@ -1,13 +1,5 @@
 # PDC Stack Control queries
 
-## Providers
-
-provider_add.sh
-* add a single provider
-
-providers_update.sh
-* add a batch of providers
-
 
 ## Queries
 
