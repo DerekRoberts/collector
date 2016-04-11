@@ -30,5 +30,5 @@ hubdb:
   restart: always
   log_driver: "syslog"
   volumes:
-    - ${VOLS}/private/mongo_live/:/data/db/:rw
-    - ${VOLS}/private/mongo_dump/:/data/dump/:rw
+    - ${VOLS}/private/composerDb/live/:/data/db/:rw
+    - ${VOLS}/private/composerDb/dump/:/data/dump/:rw
