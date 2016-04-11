@@ -11,10 +11,8 @@
 *.rar
 .vagrant/
 .directory
-dev/*/
+dev/*/*
 dev/dev.yml
-vols/
-test.sh
 
 ########################
 ### GitHub Suggested ###
