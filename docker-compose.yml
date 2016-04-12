@@ -18,9 +18,7 @@ composer:
     - "2774:22"
     - "3002:3002"
   volumes:
-    - ${VOLS}/config/authorized_keys/:/home/autossh/.ssh/:rw
-    - ${VOLS}/config/composer_keys/:/etc/ssh/:rw
-    - ${VOLS}/config/scheduled_jobs/:/app/util/job_params/:rw
+    - ${VOLS}/config/composer/:/config:rw
 
 
 composerdb:
