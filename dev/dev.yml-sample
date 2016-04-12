@@ -18,7 +18,7 @@ composer:
 #  build: ./dev/composer
 
 
-hubdb:
+composerdb:
   log_driver: "json-file"
   ports:
     - "27017:27017"

@@ -9,11 +9,11 @@
 composer:
   container_name: composer
   hostname: composer
-  image: pdcbc/composer:${TAG}
+  image: healthdatacoalition/composer:${TAG}
   restart: always
   log_driver: "syslog"
   links:
-    - hubdb:hubdb
+    - composerdb:database
   ports:
     - "2774:22"
     - "3002:3002"
@@ -23,10 +23,10 @@ composer:
     - ${VOLS}/config/scheduled_jobs/:/app/util/job_params/:rw
 
 
-hubdb:
-  container_name: hubdb
-  hostname: hubdb
-  image: pdcbc/hubdb:${TAG}
+composerdb:
+  container_name: composerdb
+  hostname: composerdb
+  image: healthdatacoalition/composerdb:${TAG}
   restart: always
   log_driver: "syslog"
   volumes:
