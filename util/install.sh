@@ -14,12 +14,17 @@ if [ "${TYPE}" = "PROMPT" ]
 then
   echo
   echo
-  echo "This will stop and rebuild the Collector Stack."
+  echo "This will stop and rebuild the Collector Stack"
   echo
-  echo "prod       = production deployment."
-  echo "dev        = development deployment."
-  echo "prodHybrid = +local builds and containers from dev/dev.yml."
-  echo "devHybrid  = +local builds and containers from dev/dev.yml."
+  echo "Please see https://hub.docker.com/u/healthdatacoalition/"
+  echo
+  echo "prod       = production images"
+  echo "latest     = latest (master) images"
+  echo "dev        = development images"
+  echo
+  echo "prodPlus   + config from dev/dev.yml"
+  echo "latestPlus "
+  echo "devPlus    "
   echo
   echo "Please enter a build type, as above, or anything else to cancel."
   read TYPE
@@ -31,17 +36,25 @@ fi
 #
 if [ "${TYPE}" = "prod" ]
 then
+  TAG=prod
+  MODE=prod
+elif [ "${TYPE}" = "latest" ]
+then
   TAG=latest
   MODE=prod
 elif [ "${TYPE}" = "dev" ]
 then
   TAG=dev
   MODE=prod
-elif [ "${TYPE}" = "prodHybrid" ]
+elif [ "${TYPE}" = "prodPlus" ]
+then
+  TAG=prod
+  MODE=dev
+elif [ "${TYPE}" = "latestPlus" ]
 then
   TAG=latest
   MODE=dev
-elif [ "${TYPE}" = "devHybrid" ]
+elif [ "${TYPE}" = "devPlus" ]
 then
   TAG=dev
   MODE=dev
