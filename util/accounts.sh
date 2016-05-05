@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-set -e -o nounset
+set -e
 
 
 # Set build type or flag for prompt
