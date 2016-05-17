@@ -27,18 +27,6 @@ composerdb:
 
 endpoint:
   log_driver: "json-file"
-#  build: ./dev/gateway
-  container_name: endpoint
-  hostname: endpoint
-  image: pdcbc/gateway:${TAG}
-  restart: always
-  links:
-    - composer:composer
   ports:
     - 3001:3001
-  volumes:
-    - ${VOLS}/private/endpoint:/volumes
-  environment:
-    - PORT_AUTOSSH=22
-    - GATEWAY_ID=0
-    - IP_COMPOSER=composer
+#  build: ./dev/gateway

@@ -1,4 +1,4 @@
-# Docker Compose file for the PDC's Hub Stack
+# Docker Compose file for the HDC's Hub Stack
 #
 #
 # Used for collecting aggregate data queries.
@@ -30,3 +30,18 @@ composerdb:
   volumes:
     - ${VOLS}/private/composerDb/live/:/data/db/:rw
     - ${VOLS}/private/composerDb/dump/:/data/dump/:rw
+
+
+endpoint:
+  container_name: endpoint
+  hostname: endpoint
+  image: pdcbc/gateway:latest
+  restart: always
+  links:
+    - composer:composer
+  volumes:
+    - ${VOLS}/private/endpoint:/volumes
+  environment:
+    - PORT_AUTOSSH=22
+    - GATEWAY_ID=0
+    - IP_COMPOSER=composer
