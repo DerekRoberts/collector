@@ -14,12 +14,14 @@ queries: query_importer
 ###################
 
 deploy:
+	@	which docker-compose || make config-docker
+	@	[ -s ./dev/dev.yml ] || sudo cp ./dev/dev.yml-sample ./dev/dev.yml
 	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) pull
 	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) build
 	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) up -d
 
 config-docker:
-	@ wget -qO- https://raw.githubusercontent.com/PDCbc/devops/master/docker_setup.sh | sh
+	@	wget -qO- https://raw.githubusercontent.com/PDCbc/devops/master/docker_setup.sh | sh
 
 config-mongodb:
 	@	( echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled )> /dev/null
@@ -45,8 +47,6 @@ query_importer:
 	sudo docker exec query_importer /app/queryImporter/import_queries.sh
 	sudo docker rm -fv query_importer
 
-vtest:
-	echo ${VOLS} should be populated
 
 
 ################
