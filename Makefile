@@ -6,7 +6,7 @@ default: configure deploy
 
 configure: config-docker config-mongodb
 
-queries: query_importer
+queries: query-importer
 
 
 ###################
@@ -41,12 +41,9 @@ config-mongodb:
 		fi; \
 		sudo chmod 755 /etc/rc.local
 
-query_importer:
-	sudo docker pull pdcbc/hapi:latest
-	sudo docker run -d --name query_importer --link hubdb:hubdb pdcbc/hapi:latest
-	sudo docker exec query_importer /app/queryImporter/import_queries.sh
-	sudo docker rm -fv query_importer
-
+query-importer:
+	sudo docker pull healthdatacoalition/queryimporter:latest
+	sudo docker run --rm --name=queryimporter -h queryimporter --link composerdb:composerdb healthdatacoalition/queryimporter:latest
 
 
 ################
