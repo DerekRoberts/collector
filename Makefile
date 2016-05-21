@@ -2,7 +2,7 @@
 # General Jobs #
 ################
 
-default: configure deploy
+default: config-mongodb deploy queries sample-data
 
 configure: config-docker config-mongodb
 
@@ -44,6 +44,14 @@ config-mongodb:
 query-importer:
 	sudo docker pull healthdatacoalition/queryimporter:latest
 	sudo docker run --rm --name=queryimporter -h queryimporter --link composerdb:composerdb healthdatacoalition/queryimporter:latest
+
+export:
+	sudo docker pull healthdatacoalition/analyticbridge:latest
+	sudo docker run --rm --name=bridge -h bridge --link composerdb:database -v /hdc/config/bridge:/app/config -v /hdc/private/bridge:/app/scorecards healthdatacoalition/analyticbridge:latest
+
+sample-data:
+	sudo docker exec endpoint /gateway/util/sample10/import.sh || true
+
 
 
 ################
