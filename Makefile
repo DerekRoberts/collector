@@ -21,7 +21,7 @@ deploy:
 	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) up -d
 
 config-docker:
-	@	wget -qO- https://raw.githubusercontent.com/PDCbc/devops/master/docker_setup.sh | sh
+		wget -qO- https://raw.githubusercontent.com/HDCbc/devops/master/docker_setup.sh | sh
 
 config-mongodb:
 	@	( echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled )> /dev/null
@@ -42,15 +42,15 @@ config-mongodb:
 		sudo chmod 755 /etc/rc.local
 
 query-importer:
-	sudo docker pull healthdatacoalition/queryimporter:latest
-	sudo docker run --rm --name=queryimporter -h queryimporter --link composerdb:composerdb healthdatacoalition/queryimporter:latest
+	@	sudo docker pull healthdatacoalition/queryimporter:latest
+	@	sudo docker run --rm --name=queryimporter -h queryimporter --link composerdb:composerdb healthdatacoalition/queryimporter:latest
 
 export:
-	sudo docker pull healthdatacoalition/analyticbridge:latest
-	sudo docker run --rm --name=bridge -h bridge --link composerdb:database -v /hdc/config/bridge:/app/config -v /hdc/private/bridge:/app/scorecards healthdatacoalition/analyticbridge:latest
+	@	sudo docker pull healthdatacoalition/analyticbridge:latest
+	@	sudo docker run --rm --name=bridge -h bridge --link composerdb:database -v /hdc/config/bridge:/app/config -v /hdc/private/bridge:/app/scorecards healthdatacoalition/analyticbridge:latest
 
 sample-data:
-	sudo docker exec endpoint /gateway/util/sample10/import.sh || true
+	@	sudo docker exec endpoint /gateway/util/sample10/import.sh || true
 
 
 
