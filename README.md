@@ -5,12 +5,12 @@
 This will also install Docker and disable transparent_hugepage for MongoDB.
 
 ```bash
-git clone https://github.com/pdcbc/stack.git
+git clone https://github.com/HDCbc/collector.git
 cd stack
 make
 ```
 
-PDC images are found at https://hub.docker.com/r/pdcbc
+Images are found at https://hub.docker.com/u/healthdatacoalition/
 
 ## Dependencies
 
@@ -35,7 +35,7 @@ To build using select local repositories:
  * Uncomment the appropriate line in ./dev/dev.yml
   * e.g. build: './dev/<repository>' in ./dev/dev.yml
  * Clone repositories to dev
-  * cd dev; git clone https://github.com/pdcbc/<repository>
+  * cd dev; git clone https://github.com/hdcbc/<repository>
 
 Make them using dev mode:
 
