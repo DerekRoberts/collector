@@ -21,7 +21,7 @@ deploy:
 	@	sudo TAG=$(TAG) VOLS=${VOLS} docker-compose $(YML) up -d
 
 config-docker:
-		wget -qO- https://raw.githubusercontent.com/HDCbc/devops/master/docker_setup.sh | sh
+		wget -qO- https://raw.githubusercontent.com/HDCbc/devops/master/deploy/docker_setup.sh | sh
 
 config-mongodb:
 	@	( echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled )> /dev/null
