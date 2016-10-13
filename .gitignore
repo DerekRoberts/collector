@@ -11,8 +11,9 @@
 *.rar
 .vagrant/
 .directory
-dev/*/*
-dev/dev.yml
+dev/*
+!dev/dev.yml-sample
+!dev/README.md
 
 ########################
 ### GitHub Suggested ###
