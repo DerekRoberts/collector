@@ -24,7 +24,7 @@ composer:
 composerdb:
   container_name: composerdb
   hostname: composerdb
-  image: healthdatacoalition/composerdb:${TAG}
+  image: mongo:3.2.9
   restart: always
   log_driver: "syslog"
   volumes:
