@@ -18,8 +18,8 @@ composer:
     - "2774:22"
     - "3002:3002"
   volumes:
-    - ${VOLS}/config/composer/:/config:rw
-    - ${VOLS}/private/composerDb/dump/:/dump/:rw
+    - ${VOLS}/config/composer:/config:rw
+    - ${VOLS}/private/composerDb/dump:/dump:rw
 
 
 composerdb:
@@ -32,16 +32,24 @@ composerdb:
     - ${VOLS}/private/composerDb/live/:/data/db/:rw
 
 
-endpoint:
-  container_name: endpoint
-  hostname: endpoint
+gateway:
+  container_name: gateway
+  hostname: gateway
   image: hdcbc/gateway:latest
   restart: always
   links:
-    - composer:composer
+    - composer
+    - gatewaydb:database
   volumes:
-    - ${VOLS}/private/endpoint:/volumes
+    - ${VOLS}/config/gateway:/home/autossh/.ssh/
   environment:
     - PORT_AUTOSSH=22
     - GATEWAY_ID=0
     - IP_COMPOSER=composer
+
+
+gatewaydb:
+  container_name: gatewaydb
+  hostname: gatewaydb:database
+  image: mongo:3.2.9
+  restart: always

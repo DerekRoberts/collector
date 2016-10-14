@@ -25,7 +25,7 @@ composerdb:
 #  build: ./dev/composer/DockerfileMongoDb
 
 
-endpoint:
+gateway:
   log_driver: "json-file"
   ports:
     - 3001:3001

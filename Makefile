@@ -50,7 +50,7 @@ export:
 	@	sudo docker run --rm --name=bridge -h bridge --link composerdb -v /hdc/config/bridge:/app/config -v /hdc/private/bridge:/app/scorecards hdcbc/analyticbridge:latest
 
 sample-data:
-	@	sudo docker exec endpoint /gateway/util/sample10/import.sh || true
+	@	sudo docker exec gateway /gateway/util/sample10/import.sh || true
 
 
 
