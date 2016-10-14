@@ -9,7 +9,7 @@
 composer:
   container_name: composer
   hostname: composer
-  image: healthdatacoalition/composer:${TAG}
+  image: hdcbc/composer:${TAG}
   restart: always
   log_driver: "syslog"
   links:
