@@ -19,6 +19,7 @@ composer:
     - "3002:3002"
   volumes:
     - ${VOLS}/config/composer/:/config:rw
+    - ${VOLS}/private/composerDb/dump/:/dump/:rw
 
 
 composerdb:
@@ -29,7 +30,6 @@ composerdb:
   log_driver: "syslog"
   volumes:
     - ${VOLS}/private/composerDb/live/:/data/db/:rw
-    - ${VOLS}/private/composerDb/dump/:/data/dump/:rw
 
 
 endpoint:
