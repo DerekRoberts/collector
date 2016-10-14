@@ -42,12 +42,12 @@ config-mongodb:
 		sudo chmod 755 /etc/rc.local
 
 query-importer:
-	@	sudo docker pull healthdatacoalition/queryimporter:latest
-	@	sudo docker run --rm --name=queryimporter -h queryimporter --link composerdb:composerdb healthdatacoalition/queryimporter:latest
+	@	sudo docker pull hdcbc/queryimporter:latest
+	@	sudo docker run --rm --name=queryimporter -h queryimporter --link composerdb hdcbc/queryimporter:latest
 
 export:
-	@	sudo docker pull healthdatacoalition/analyticbridge:latest
-	@	sudo docker run --rm --name=bridge -h bridge --link composerdb:database -v /hdc/config/bridge:/app/config -v /hdc/private/bridge:/app/scorecards healthdatacoalition/analyticbridge:latest
+	@	sudo docker pull hdc/analyticbridge:latest
+	@	sudo docker run --rm --name=bridge -h bridge --link composerdb -v /hdc/config/bridge:/app/config -v /hdc/private/bridge:/app/scorecards hdcbc/analyticbridge:latest
 
 sample-data:
 	@	sudo docker exec endpoint /gateway/util/sample10/import.sh || true

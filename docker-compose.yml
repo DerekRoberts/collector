@@ -13,7 +13,7 @@ composer:
   restart: always
   log_driver: "syslog"
   links:
-    - composerdb:database
+    - composerdb
   ports:
     - "2774:22"
     - "3002:3002"
@@ -35,7 +35,7 @@ composerdb:
 endpoint:
   container_name: endpoint
   hostname: endpoint
-  image: pdcbc/gateway:latest
+  image: hdcbc/gateway:latest
   restart: always
   links:
     - composer:composer
