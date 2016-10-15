@@ -22,8 +22,6 @@ composerdb:
   log_driver: "json-file"
   ports:
     - "27017:27017"
-#  build: ./dev/composer/DockerfileMongoDb
-
 
 gateway:
   log_driver: "json-file"

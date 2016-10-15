@@ -19,7 +19,7 @@ composer:
     - "3002:3002"
   volumes:
     - ${VOLS}/config/composer:/config:rw
-    - ${VOLS}/private/composerDb/dump:/dump:rw
+    - ${VOLS}/private/composerDb/dump:/private:rw
 
 
 composerdb:
@@ -29,7 +29,7 @@ composerdb:
   restart: always
   log_driver: "syslog"
   volumes:
-    - ${VOLS}/private/composerDb/live/:/data/db/:rw
+    - ${VOLS}/private/composerDb/live:/data/db:rw
 
 
 gateway:
@@ -41,7 +41,7 @@ gateway:
     - composer
     - gatewaydb:database
   volumes:
-    - ${VOLS}/config/gateway:/home/autossh/.ssh/
+    - ${VOLS}/config/gateway:/home/autossh/.ssh
   environment:
     - PORT_AUTOSSH=22
     - GATEWAY_ID=0
