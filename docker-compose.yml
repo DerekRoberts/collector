@@ -45,7 +45,8 @@ gateway:
   environment:
     - PORT_AUTOSSH=22
     - GATEWAY_ID=0
-    - IP_COMPOSER=composer
+    - IP_PROD=composer
+    - USE_QDEV=no
 
 
 gatewaydb:
